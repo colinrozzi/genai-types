@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 
 /// Different types of content that can be in a message
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(tag = "type", rename_all = "snake_case", content = "content")]
 pub enum MessageContent {
     Text {
         text: String,
