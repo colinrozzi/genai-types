@@ -143,6 +143,10 @@ pub enum StopReason {
     /// Generation stopped because a tool was used
     #[serde(rename = "tool_use")]
     ToolUse,
+
+    /// Other reason
+    #[serde(rename = "other")]
+    Other(String),
 }
 
 /// Request format for the anthropic-proxy actor
