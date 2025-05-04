@@ -111,7 +111,7 @@ pub struct CompletionResponse {
     pub model: String,
 
     // always "assistant"
-    pub role: String,
+    pub role: Role,
 
     pub stop_reason: StopReason,
 
