@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 description = "Common types for generative AI models like OpenAI, Anthropic, Google, etc."
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/youruser/genai-types"
+repository = "https://github.com/colinrozzi/genai-types"
 
 [dependencies]
 mcp-protocol = "0.2.0"
