@@ -28,17 +28,35 @@ pub enum MessageContent {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Message {
     /// Role of the message sender (user, assistant, system)
-    pub role: String,
+    pub role: Role,
 
     /// Content of the message as vector of MessageContent objects
     pub content: Vec<MessageContent>,
+}
+
+/// Role of the message sender
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub enum Role {
+    #[serde(rename = "user")]
+    User,
+
+    #[serde(rename = "assistant")]
+    Assistant,
+
+    #[serde(rename = "system")]
+    System,
 }
 
 impl Message {
     /// Create a new message with structured content
     pub fn new_structured(role: impl Into<String>, content: Vec<MessageContent>) -> Self {
         Self {
-            role: role.into(),
+            role: match role.into().as_str() {
+                "user" => Role::User,
+                "assistant" => Role::Assistant,
+                "system" => Role::System,
+                _ => panic!("Invalid role"),
+            },
             content,
         }
     }
@@ -47,7 +65,7 @@ impl Message {
 /// Request to generate a completion from Claude
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CompletionRequest {
-    /// The Claude model to use
+    /// The model to use
     pub model: String,
 
     /// List of messages in the conversation
@@ -62,7 +80,7 @@ pub struct CompletionRequest {
     /// System prompt to use
     pub system: Option<String>,
 
-    /// Tools to make available to Claude
+    /// Tools to make available to the model
     pub tools: Option<Vec<Tool>>,
 
     /// Tool choice configuration
