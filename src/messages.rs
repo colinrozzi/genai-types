@@ -126,7 +126,7 @@ pub struct CompletionResponse {
 }
 
 /// Reason why generation stopped
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 pub enum StopReason {
     /// Generation stopped because the end of a turn was reached
     #[serde(rename = "end_turn")]
