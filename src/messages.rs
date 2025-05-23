@@ -125,6 +125,15 @@ pub struct CompletionResponse {
     pub usage: Usage,
 }
 
+impl From<CompletionResponse> for Message {
+    fn from(request: CompletionResponse) -> Self {
+        Self {
+            role: request.role,
+            content: request.content,
+        }
+    }
+}
+
 /// Reason why generation stopped
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 pub enum StopReason {
